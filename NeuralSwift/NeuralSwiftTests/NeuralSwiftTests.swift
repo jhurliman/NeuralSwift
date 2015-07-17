@@ -44,7 +44,8 @@ class SigmoidTests: XCTestCase {
         XCTAssertEqualWithAccuracy(0.3775407, sigmoid(-0.5), 0.000001)
         XCTAssertEqualWithAccuracy(0.9999546, sigmoid(10.0), 0.000001)
         
-        let sVec = SigmoidLayer.sigmoid([0.0, 0.5, 1.0, -0.5, 10.0])
+        let sigmoidLayer = SigmoidLayer(layerSize: 1, prevLayerSize: 1)
+        let sVec = sigmoidLayer.activation([0.0, 0.5, 1.0, -0.5, 10.0])
         XCTAssertEqual(0.5, sVec[0])
         XCTAssertEqualWithAccuracy(0.6224593, sVec[1], 0.000001)
         XCTAssertEqualWithAccuracy(0.7310586, sVec[2], 0.000001)
@@ -70,12 +71,12 @@ class SigmoidTests: XCTestCase {
         
         let biases: [Float] = [0]
         let weights = Matrix<Float>([ [0] ])
-        let layer = SigmoidLayer(biases: biases, weights: weights)
+        var layer = SigmoidLayer(biases: biases, weights: weights)
         
         let initialOutput = layer.feedForward(inputs)
         
         for _ in 1...100 {
-            let trainer = SigmoidLayerTrainer(layer: layer)
+            let trainer = LayerTrainer(layer: layer)
             var activations = trainer.feedForward(inputs)
             var delta = trainer.cost_Df(targetActivations)
             var result = trainer.backPropagate(delta, prevLayerActivations: inputs)

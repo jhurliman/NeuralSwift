@@ -8,23 +8,13 @@
 
 import Foundation
 
-public struct TrainingSample {
-    public var inputs: [Float]
-    public var outputs: [Float]
-    
-    public init(inputs: [Float], outputs: [Float]) {
-        self.inputs = inputs
-        self.outputs = outputs
-    }
-}
-
 public class Network {
-    let layers: [SigmoidLayer]
+    let layers: [Layer]
     
     public init(sizes: [Int]) {
         precondition(sizes.count >= 2, "Network must contain at least an input layer and output layer")
         
-        var layers = [SigmoidLayer]()
+        var layers = [Layer]()
         layers.reserveCapacity(sizes.count - 1)
         
         // Skip the first element in sizes, which specifies the input size
@@ -72,9 +62,9 @@ public class Network {
     }
     
     func updateMiniBatch(miniBatch: ArraySlice<TrainingSample>, eta: Float) {
-        var trainingNetwork = [SigmoidLayerTrainer]()
+        var trainingNetwork = [LayerTrainer]()
         trainingNetwork.reserveCapacity(layers.count)
-        for i in 0..<layers.count { trainingNetwork.append(SigmoidLayerTrainer(layer: layers[i])) }
+        for i in 0..<layers.count { trainingNetwork.append(LayerTrainer(layer: layers[i])) }
         
         // TODO: Matrix-based mini-batch updates
         for sample in miniBatch {
@@ -89,7 +79,7 @@ public class Network {
         }
     }
     
-    func backPropagate(trainingNetwork: [SigmoidLayerTrainer], inputs: [Float], outputs: [Float]) {
+    func backPropagate(trainingNetwork: [LayerTrainer], inputs: [Float], outputs: [Float]) {
         precondition(trainingNetwork.count == layers.count, "Training network does not match network")
         
         // Forward pass
