@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F690CBA1B53370A00EF1D35 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F690CB91B53370A00EF1D35 /* Accelerate.framework */; };
+		9F690CC61B5337EA00EF1D35 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CBE1B5337EA00EF1D35 /* Arithmetic.swift */; };
+		9F690CC71B5337EA00EF1D35 /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CBF1B5337EA00EF1D35 /* Auxiliary.swift */; };
+		9F690CC81B5337EA00EF1D35 /* Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC01B5337EA00EF1D35 /* Exponential.swift */; };
+		9F690CC91B5337EA00EF1D35 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC11B5337EA00EF1D35 /* FFT.swift */; };
+		9F690CCA1B5337EA00EF1D35 /* Hyperbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC21B5337EA00EF1D35 /* Hyperbolic.swift */; };
+		9F690CCB1B5337EA00EF1D35 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC31B5337EA00EF1D35 /* Matrix.swift */; };
+		9F690CCC1B5337EA00EF1D35 /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC41B5337EA00EF1D35 /* Power.swift */; };
+		9F690CCD1B5337EA00EF1D35 /* Trigonometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CC51B5337EA00EF1D35 /* Trigonometric.swift */; };
+		9F690CCF1B53382F00EF1D35 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CCE1B53382F00EF1D35 /* Random.swift */; };
+		9F690CD11B5338C800EF1D35 /* SigmoidLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CD01B5338C800EF1D35 /* SigmoidLayer.swift */; };
+		9FEFC5DC1B51EC87007C3C4A /* NeuralSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FEFC5DB1B51EC87007C3C4A /* NeuralSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9FEFC5E21B51EC87007C3C4A /* NeuralSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */; };
+		9FEFC5E91B51EC87007C3C4A /* NeuralSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEFC5E81B51EC87007C3C4A /* NeuralSwiftTests.swift */; };
+		9FEFC5F31B51ECC2007C3C4A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEFC5F21B51ECC2007C3C4A /* Network.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9FEFC5E31B51EC87007C3C4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FEFC5CD1B51EC87007C3C4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9FEFC5D51B51EC87007C3C4A;
+			remoteInfo = NeuralSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9F690CB91B53370A00EF1D35 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9F690CBE1B5337EA00EF1D35 /* Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
+		9F690CBF1B5337EA00EF1D35 /* Auxiliary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auxiliary.swift; sourceTree = "<group>"; };
+		9F690CC01B5337EA00EF1D35 /* Exponential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exponential.swift; sourceTree = "<group>"; };
+		9F690CC11B5337EA00EF1D35 /* FFT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFT.swift; sourceTree = "<group>"; };
+		9F690CC21B5337EA00EF1D35 /* Hyperbolic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hyperbolic.swift; sourceTree = "<group>"; };
+		9F690CC31B5337EA00EF1D35 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		9F690CC41B5337EA00EF1D35 /* Power.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Power.swift; sourceTree = "<group>"; };
+		9F690CC51B5337EA00EF1D35 /* Trigonometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trigonometric.swift; sourceTree = "<group>"; };
+		9F690CCE1B53382F00EF1D35 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		9F690CD01B5338C800EF1D35 /* SigmoidLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigmoidLayer.swift; sourceTree = "<group>"; };
+		9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NeuralSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FEFC5DA1B51EC87007C3C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FEFC5DB1B51EC87007C3C4A /* NeuralSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeuralSwift.h; sourceTree = "<group>"; };
+		9FEFC5E11B51EC87007C3C4A /* NeuralSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeuralSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FEFC5E71B51EC87007C3C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FEFC5E81B51EC87007C3C4A /* NeuralSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralSwiftTests.swift; sourceTree = "<group>"; };
+		9FEFC5F21B51ECC2007C3C4A /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9FEFC5D21B51EC87007C3C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F690CBA1B53370A00EF1D35 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FEFC5DE1B51EC87007C3C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FEFC5E21B51EC87007C3C4A /* NeuralSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9F690CBD1B5337EA00EF1D35 /* Surge */ = {
+			isa = PBXGroup;
+			children = (
+				9F690CBE1B5337EA00EF1D35 /* Arithmetic.swift */,
+				9F690CBF1B5337EA00EF1D35 /* Auxiliary.swift */,
+				9F690CC01B5337EA00EF1D35 /* Exponential.swift */,
+				9F690CC11B5337EA00EF1D35 /* FFT.swift */,
+				9F690CC21B5337EA00EF1D35 /* Hyperbolic.swift */,
+				9F690CC31B5337EA00EF1D35 /* Matrix.swift */,
+				9F690CC41B5337EA00EF1D35 /* Power.swift */,
+				9F690CC51B5337EA00EF1D35 /* Trigonometric.swift */,
+			);
+			path = Surge;
+			sourceTree = "<group>";
+		};
+		9FEFC5CC1B51EC87007C3C4A = {
+			isa = PBXGroup;
+			children = (
+				9F690CB91B53370A00EF1D35 /* Accelerate.framework */,
+				9FEFC5D81B51EC87007C3C4A /* NeuralSwift */,
+				9FEFC5E51B51EC87007C3C4A /* NeuralSwiftTests */,
+				9FEFC5D71B51EC87007C3C4A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9FEFC5D71B51EC87007C3C4A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */,
+				9FEFC5E11B51EC87007C3C4A /* NeuralSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9FEFC5D81B51EC87007C3C4A /* NeuralSwift */ = {
+			isa = PBXGroup;
+			children = (
+				9FEFC5D91B51EC87007C3C4A /* Supporting Files */,
+				9F690CBD1B5337EA00EF1D35 /* Surge */,
+				9FEFC5DB1B51EC87007C3C4A /* NeuralSwift.h */,
+				9FEFC5F21B51ECC2007C3C4A /* Network.swift */,
+				9F690CCE1B53382F00EF1D35 /* Random.swift */,
+				9F690CD01B5338C800EF1D35 /* SigmoidLayer.swift */,
+			);
+			path = NeuralSwift;
+			sourceTree = "<group>";
+		};
+		9FEFC5D91B51EC87007C3C4A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9FEFC5DA1B51EC87007C3C4A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9FEFC5E51B51EC87007C3C4A /* NeuralSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				9FEFC5E81B51EC87007C3C4A /* NeuralSwiftTests.swift */,
+				9FEFC5E61B51EC87007C3C4A /* Supporting Files */,
+			);
+			path = NeuralSwiftTests;
+			sourceTree = "<group>";
+		};
+		9FEFC5E61B51EC87007C3C4A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9FEFC5E71B51EC87007C3C4A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9FEFC5D31B51EC87007C3C4A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FEFC5DC1B51EC87007C3C4A /* NeuralSwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9FEFC5D51B51EC87007C3C4A /* NeuralSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FEFC5EC1B51EC87007C3C4A /* Build configuration list for PBXNativeTarget "NeuralSwift" */;
+			buildPhases = (
+				9FEFC5D11B51EC87007C3C4A /* Sources */,
+				9FEFC5D21B51EC87007C3C4A /* Frameworks */,
+				9FEFC5D31B51EC87007C3C4A /* Headers */,
+				9FEFC5D41B51EC87007C3C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NeuralSwift;
+			productName = NeuralSwift;
+			productReference = 9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9FEFC5E01B51EC87007C3C4A /* NeuralSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FEFC5EF1B51EC87007C3C4A /* Build configuration list for PBXNativeTarget "NeuralSwiftTests" */;
+			buildPhases = (
+				9FEFC5DD1B51EC87007C3C4A /* Sources */,
+				9FEFC5DE1B51EC87007C3C4A /* Frameworks */,
+				9FEFC5DF1B51EC87007C3C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9FEFC5E41B51EC87007C3C4A /* PBXTargetDependency */,
+			);
+			name = NeuralSwiftTests;
+			productName = NeuralSwiftTests;
+			productReference = 9FEFC5E11B51EC87007C3C4A /* NeuralSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9FEFC5CD1B51EC87007C3C4A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "John Hurliman";
+				TargetAttributes = {
+					9FEFC5D51B51EC87007C3C4A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					9FEFC5E01B51EC87007C3C4A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 9FEFC5D01B51EC87007C3C4A /* Build configuration list for PBXProject "NeuralSwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9FEFC5CC1B51EC87007C3C4A;
+			productRefGroup = 9FEFC5D71B51EC87007C3C4A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9FEFC5D51B51EC87007C3C4A /* NeuralSwift */,
+				9FEFC5E01B51EC87007C3C4A /* NeuralSwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9FEFC5D41B51EC87007C3C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FEFC5DF1B51EC87007C3C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9FEFC5D11B51EC87007C3C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F690CCB1B5337EA00EF1D35 /* Matrix.swift in Sources */,
+				9FEFC5F31B51ECC2007C3C4A /* Network.swift in Sources */,
+				9F690CCF1B53382F00EF1D35 /* Random.swift in Sources */,
+				9F690CC61B5337EA00EF1D35 /* Arithmetic.swift in Sources */,
+				9F690CD11B5338C800EF1D35 /* SigmoidLayer.swift in Sources */,
+				9F690CCD1B5337EA00EF1D35 /* Trigonometric.swift in Sources */,
+				9F690CCC1B5337EA00EF1D35 /* Power.swift in Sources */,
+				9F690CCA1B5337EA00EF1D35 /* Hyperbolic.swift in Sources */,
+				9F690CC71B5337EA00EF1D35 /* Auxiliary.swift in Sources */,
+				9F690CC91B5337EA00EF1D35 /* FFT.swift in Sources */,
+				9F690CC81B5337EA00EF1D35 /* Exponential.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FEFC5DD1B51EC87007C3C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FEFC5E91B51EC87007C3C4A /* NeuralSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9FEFC5E41B51EC87007C3C4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9FEFC5D51B51EC87007C3C4A /* NeuralSwift */;
+			targetProxy = 9FEFC5E31B51EC87007C3C4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9FEFC5EA1B51EC87007C3C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9FEFC5EB1B51EC87007C3C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9FEFC5ED1B51EC87007C3C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = NeuralSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9FEFC5EE1B51EC87007C3C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = NeuralSwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9FEFC5F01B51EC87007C3C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NeuralSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9FEFC5F11B51EC87007C3C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NeuralSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9FEFC5D01B51EC87007C3C4A /* Build configuration list for PBXProject "NeuralSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FEFC5EA1B51EC87007C3C4A /* Debug */,
+				9FEFC5EB1B51EC87007C3C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FEFC5EC1B51EC87007C3C4A /* Build configuration list for PBXNativeTarget "NeuralSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FEFC5ED1B51EC87007C3C4A /* Debug */,
+				9FEFC5EE1B51EC87007C3C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FEFC5EF1B51EC87007C3C4A /* Build configuration list for PBXNativeTarget "NeuralSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FEFC5F01B51EC87007C3C4A /* Debug */,
+				9FEFC5F11B51EC87007C3C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9FEFC5CD1B51EC87007C3C4A /* Project object */;
+}
