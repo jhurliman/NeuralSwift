@@ -15,7 +15,7 @@ public class SigmoidLayer: Layer {
     
     public init(layerSize: Int, prevLayerSize: Int) {
         biases = gaussian(layerSize)
-        weights = Matrix((0..<layerSize).map { _ in gaussian(prevLayerSize) })
+        weights = Matrix(rows: layerSize, columns: prevLayerSize, contents: gaussian(layerSize * prevLayerSize))
     }
     
     public init(biases: [Float], weights: Matrix<Float>) {
@@ -32,20 +32,22 @@ public class SigmoidLayer: Layer {
     public func activation(z: [Float]) -> [Float] {
         // Sigmoid Function: 1.0 / (1.0 + exp(-z))
         
-        var expMinusX = [Float](count: z.count, repeatedValue: 0.0)
-        var oneVec = [Float](count: z.count, repeatedValue: 1.0)
-        var negOneVec = [Float](count: z.count, repeatedValue: -1.0)
+        let count = z.count
         
-        var negativeZ = [Float](count: z.count, repeatedValue: 0.0)
+        var expMinusX = [Float](count: count, repeatedValue: 0.0)
+        var oneVec = [Float](count: count, repeatedValue: 1.0)
+        var negOneVec = [Float](count: count, repeatedValue: -1.0)
+        
+        var negativeZ = [Float](count: count, repeatedValue: 0.0)
         for (index, value) in enumerate(z) {
             negativeZ[index] = Float(-value)
         }
         
-        var localcount = Int32(z.count)
-        var y = [Float](count: z.count, repeatedValue: 0.0)
+        var localcount = Int32(count)
+        var y = [Float](count: count, repeatedValue: 0.0)
         
         vvexpf(&expMinusX, &negativeZ, &localcount)
-        cblas_saxpy(Int32(oneVec.count), 1.0, &expMinusX, 1, &oneVec, 1)
+        cblas_saxpy(Int32(count), 1.0, &expMinusX, 1, &oneVec, 1)
         vvpowf(&y, &negOneVec, &oneVec, &localcount)
         
         return y

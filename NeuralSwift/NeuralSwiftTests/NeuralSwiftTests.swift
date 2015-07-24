@@ -101,16 +101,21 @@ class NeuralSwiftTests: XCTestCase {
             TrainingSample(inputs: [0, 1], outputs: [1]),
             TrainingSample(inputs: [1, 0], outputs: [1]),
             TrainingSample(inputs: [0, 0], outputs: [0]),
+            
+            TrainingSample(inputs: [1, 1], outputs: [0]),
+            TrainingSample(inputs: [0, 1], outputs: [1]),
+            TrainingSample(inputs: [1, 0], outputs: [1]),
+            TrainingSample(inputs: [0, 0], outputs: [0]),
         ]
         
         measureBlock {
-            network.train(trainingData, epochs: 2500, miniBatchSize: 4, eta: 0.95)
+            network.train(trainingData, epochs: 3000, miniBatchSize: 4, eta: 0.8)
         }
         
-        let _11 = network.predictValues([1, 1]).first!
-        let _01 = network.predictValues([0, 1]).first!
-        let _10 = network.predictValues([1, 0]).first!
-        let _00 = network.predictValues([0, 0]).first!
+        let _11 = network.predictValue([1, 1])
+        let _01 = network.predictValue([0, 1])
+        let _10 = network.predictValue([1, 0])
+        let _00 = network.predictValue([0, 0])
         
         XCTAssert(_11 <  0.5, "\(_11) >= 0.5")
         XCTAssert(_01 >= 0.5, "\(_01) < 0.5")
@@ -118,3 +123,19 @@ class NeuralSwiftTests: XCTestCase {
         XCTAssert(_00 <  0.5, "\(_00) >= 0.5")
     }
 }
+
+//class MNISTLoaderTests: XCTestCase {
+//    func testLoader() {
+//        let imagesPath = "/Users/jhurliman/Code/NeuralSwift/NeuralSwiftPlayground.playground/Resources/MNIST-train-images-idx3-ubyte"
+//        let labelsPath = "/Users/jhurliman/Code/NeuralSwift/NeuralSwiftPlayground.playground/Resources/MNIST-train-labels-idx1-ubyte"
+//        
+//        let loader = MNISTLoader(imageFile: imagesPath, labelFile: labelsPath)!
+//        
+//        let digitNetwork = Network(sizes: [784, 100, 10])
+//        
+//        digitNetwork.train(loader.samples, epochs: 30, miniBatchSize: 10, eta: 3.0)
+//        
+//        let testDigit = loader.samples.first!
+//        let testDigitResult = digitNetwork.predictLabels(testDigit.inputs)
+//    }
+//}

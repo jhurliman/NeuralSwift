@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9F45357D1B58DC8000FC4736 /* TrainingSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F45357C1B58DC8000FC4736 /* TrainingSample.swift */; };
 		9F45357F1B58E0E700FC4736 /* LayerTrainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F45357E1B58E0E700FC4736 /* LayerTrainer.swift */; };
+		9F4535841B5971DD00FC4736 /* BinaryDataScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4535831B5971DD00FC4736 /* BinaryDataScanner.swift */; };
+		9F4535861B59735C00FC4736 /* MNISTLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4535851B59735C00FC4736 /* MNISTLoader.swift */; };
 		9F690CBA1B53370A00EF1D35 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F690CB91B53370A00EF1D35 /* Accelerate.framework */; };
 		9F690CC61B5337EA00EF1D35 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CBE1B5337EA00EF1D35 /* Arithmetic.swift */; };
 		9F690CC71B5337EA00EF1D35 /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CBF1B5337EA00EF1D35 /* Auxiliary.swift */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		9F45357C1B58DC8000FC4736 /* TrainingSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingSample.swift; sourceTree = "<group>"; };
 		9F45357E1B58E0E700FC4736 /* LayerTrainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerTrainer.swift; sourceTree = "<group>"; };
+		9F4535831B5971DD00FC4736 /* BinaryDataScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDataScanner.swift; sourceTree = "<group>"; };
+		9F4535851B59735C00FC4736 /* MNISTLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNISTLoader.swift; sourceTree = "<group>"; };
 		9F690CB91B53370A00EF1D35 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		9F690CBE1B5337EA00EF1D35 /* Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
 		9F690CBF1B5337EA00EF1D35 /* Auxiliary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auxiliary.swift; sourceTree = "<group>"; };
@@ -81,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F4535801B5971BE00FC4736 /* DataLoader */ = {
+			isa = PBXGroup;
+			children = (
+				9F4535831B5971DD00FC4736 /* BinaryDataScanner.swift */,
+				9F4535851B59735C00FC4736 /* MNISTLoader.swift */,
+			);
+			path = DataLoader;
+			sourceTree = "<group>";
+		};
 		9F690CBD1B5337EA00EF1D35 /* Surge */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +131,7 @@
 		9FEFC5D81B51EC87007C3C4A /* NeuralSwift */ = {
 			isa = PBXGroup;
 			children = (
+				9F4535801B5971BE00FC4736 /* DataLoader */,
 				9FEFC5D91B51EC87007C3C4A /* Supporting Files */,
 				9F690CBD1B5337EA00EF1D35 /* Surge */,
 				9F8F53B61B58DC5F00B8CCD1 /* Layer.swift */,
@@ -271,12 +285,14 @@
 				9F690CC61B5337EA00EF1D35 /* Arithmetic.swift in Sources */,
 				9F45357F1B58E0E700FC4736 /* LayerTrainer.swift in Sources */,
 				9F690CD11B5338C800EF1D35 /* SigmoidLayer.swift in Sources */,
+				9F4535841B5971DD00FC4736 /* BinaryDataScanner.swift in Sources */,
 				9F690CCD1B5337EA00EF1D35 /* Trigonometric.swift in Sources */,
 				9F690CCC1B5337EA00EF1D35 /* Power.swift in Sources */,
 				9F690CCA1B5337EA00EF1D35 /* Hyperbolic.swift in Sources */,
 				9F690CC71B5337EA00EF1D35 /* Auxiliary.swift in Sources */,
 				9F45357D1B58DC8000FC4736 /* TrainingSample.swift in Sources */,
 				9F690CC91B5337EA00EF1D35 /* FFT.swift in Sources */,
+				9F4535861B59735C00FC4736 /* MNISTLoader.swift in Sources */,
 				9F690CC81B5337EA00EF1D35 /* Exponential.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

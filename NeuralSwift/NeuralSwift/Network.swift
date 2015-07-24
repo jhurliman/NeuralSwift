@@ -26,6 +26,10 @@ public class Network {
         self.layers = layers
     }
     
+    public func predictValue(inputs: [Float]) -> Float {
+        return predictValues(inputs).first ?? 0
+    }
+    
     public func predictValues(inputs: [Float]) -> [Float] {
         var activations = inputs
         for layer in layers {
@@ -48,6 +52,7 @@ public class Network {
         var trainingData = trainingData
         
         for e in 0..<epochs {
+            //println("Starting epoch \(e+1)/\(epochs)")
             trainingData.shuffle()
             
             let batches = trainingData.count / miniBatchSize
@@ -66,9 +71,8 @@ public class Network {
         trainingNetwork.reserveCapacity(layers.count)
         for i in 0..<layers.count { trainingNetwork.append(LayerTrainer(layer: layers[i])) }
         
-        // TODO: Matrix-based mini-batch updates
         for sample in miniBatch {
-            backPropagate(trainingNetwork, inputs: sample.inputs, outputs: sample.outputs)
+            self.backPropagate(trainingNetwork, inputs: sample.inputs, outputs: sample.outputs)
         }
         
         let eta_i = eta/Float(miniBatch.count)
@@ -117,5 +121,9 @@ public class Network {
         }
         
         return maxIndices
+    }
+    
+    static func runAsync(block: dispatch_block_t) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
     }
 }

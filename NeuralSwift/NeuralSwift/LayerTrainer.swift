@@ -35,11 +35,12 @@ public class LayerTrainer {
     
     public func backPropagate(delta: [Float], prevLayerActivations: [Float]) -> [Float] {
         let delta = delta * layer.activation_Df(z)
-        biasGradients = biasGradients + delta
-        
         let deltaM = Matrix(rows: delta.count, columns: 1, contents: delta)
         let prevLayerActivationsT = Matrix(rows: 1, columns: prevLayerActivations.count, contents: prevLayerActivations)
-        weightGradients = weightGradients + (deltaM * prevLayerActivationsT)
+        let weightDelta = deltaM * prevLayerActivationsT
+        
+        biasGradients = biasGradients + delta
+        weightGradients = weightGradients + weightDelta
         
         let weightsT = layer.weights′
         return (weightsT * deltaM).grid
