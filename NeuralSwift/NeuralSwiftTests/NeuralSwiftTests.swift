@@ -78,7 +78,7 @@ class SigmoidTests: XCTestCase {
         for _ in 1...100 {
             let trainer = LayerTrainer(layer: layer)
             var activations = trainer.feedForward(inputs)
-            var delta = trainer.cost_Df(targetActivations)
+            var delta = sub(activations, targetActivations)
             var result = trainer.backPropagate(delta, prevLayerActivations: inputs)
             layer.biases = sub(layer.biases, trainer.biasGradients)
             layer.weights = sub(layer.weights, trainer.weightGradients)
@@ -133,7 +133,7 @@ class NeuralSwiftTests: XCTestCase {
 //        
 //        let digitNetwork = Network(sizes: [784, 100, 10])
 //        
-//        digitNetwork.train(loader.samples, epochs: 30, miniBatchSize: 10, eta: 3.0)
+//        digitNetwork.train(loader.samples, epochs: 30, miniBatchSize: 10, eta: 0.5)
 //        
 //        let testDigit = loader.samples.first!
 //        let testDigitResult = digitNetwork.predictLabels(testDigit.inputs)

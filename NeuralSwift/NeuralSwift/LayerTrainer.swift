@@ -34,7 +34,6 @@ public class LayerTrainer {
     }
     
     public func backPropagate(delta: [Float], prevLayerActivations: [Float]) -> [Float] {
-        let delta = delta * layer.activation_Df(z)
         let deltaM = Matrix(rows: delta.count, columns: 1, contents: delta)
         let prevLayerActivationsT = Matrix(rows: 1, columns: prevLayerActivations.count, contents: prevLayerActivations)
         let weightDelta = deltaM * prevLayerActivationsT
@@ -44,9 +43,5 @@ public class LayerTrainer {
         
         let weightsT = layer.weights′
         return (weightsT * deltaM).grid
-    }
-    
-    public func cost_Df(targetOutput: [Float]) -> [Float] {
-        return activations - targetOutput
     }
 }

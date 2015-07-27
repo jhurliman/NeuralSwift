@@ -93,14 +93,16 @@ public class Network {
         }
         
         // Compute error
-        var delta = trainingNetwork.last!.cost_Df(outputs)
+        var delta = trainingNetwork.last!.activations - outputs
         
         // Backward pass
         for i in reverse(0..<trainingNetwork.count) {
             let curTrainer = trainingNetwork[i]
+            let curLayer = curTrainer.layer
             let prevLayerActivations = (i > 0) ? trainingNetwork[i - 1].activations : inputs
             
-            delta = curTrainer.backPropagate(delta, prevLayerActivations: prevLayerActivations)
+            let backprop = curTrainer.backPropagate(delta, prevLayerActivations: prevLayerActivations)
+            delta = backprop * curLayer.activation_Df(curTrainer.z)
         }
     }
     
