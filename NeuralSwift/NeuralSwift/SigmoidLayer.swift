@@ -15,7 +15,7 @@ public class SigmoidLayer: Layer {
     
     public init(layerSize: Int, prevLayerSize: Int) {
         biases = gaussian(layerSize)
-        weights = Matrix(rows: layerSize, columns: prevLayerSize, contents: gaussian(layerSize * prevLayerSize))
+        weights = Matrix(rows: layerSize, columns: prevLayerSize, contents: gaussian(layerSize * prevLayerSize) / sqrt(Float(prevLayerSize)))
     }
     
     public init(biases: [Float], weights: Matrix<Float>) {
