@@ -23,6 +23,7 @@
 		9F690CCF1B53382F00EF1D35 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CCE1B53382F00EF1D35 /* Random.swift */; };
 		9F690CD11B5338C800EF1D35 /* SigmoidLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F690CD01B5338C800EF1D35 /* SigmoidLayer.swift */; };
 		9F8F53B71B58DC5F00B8CCD1 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8F53B61B58DC5F00B8CCD1 /* Layer.swift */; };
+		9F9616411B676BA7003FDA2E /* DecisionTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9616401B676BA7003FDA2E /* DecisionTree.swift */; };
 		9FEFC5DC1B51EC87007C3C4A /* NeuralSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FEFC5DB1B51EC87007C3C4A /* NeuralSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9FEFC5E21B51EC87007C3C4A /* NeuralSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */; };
 		9FEFC5E91B51EC87007C3C4A /* NeuralSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEFC5E81B51EC87007C3C4A /* NeuralSwiftTests.swift */; };
@@ -56,6 +57,7 @@
 		9F690CCE1B53382F00EF1D35 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		9F690CD01B5338C800EF1D35 /* SigmoidLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigmoidLayer.swift; sourceTree = "<group>"; };
 		9F8F53B61B58DC5F00B8CCD1 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		9F9616401B676BA7003FDA2E /* DecisionTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionTree.swift; sourceTree = "<group>"; };
 		9FEFC5D61B51EC87007C3C4A /* NeuralSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NeuralSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FEFC5DA1B51EC87007C3C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FEFC5DB1B51EC87007C3C4A /* NeuralSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeuralSwift.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				9F4535801B5971BE00FC4736 /* DataLoader */,
 				9FEFC5D91B51EC87007C3C4A /* Supporting Files */,
 				9F690CBD1B5337EA00EF1D35 /* Surge */,
+				9F9616401B676BA7003FDA2E /* DecisionTree.swift */,
 				9F8F53B61B58DC5F00B8CCD1 /* Layer.swift */,
 				9F45357E1B58E0E700FC4736 /* LayerTrainer.swift */,
 				9FEFC5F21B51ECC2007C3C4A /* Network.swift */,
@@ -291,6 +294,7 @@
 				9F690CCA1B5337EA00EF1D35 /* Hyperbolic.swift in Sources */,
 				9F690CC71B5337EA00EF1D35 /* Auxiliary.swift in Sources */,
 				9F45357D1B58DC8000FC4736 /* TrainingSample.swift in Sources */,
+				9F9616411B676BA7003FDA2E /* DecisionTree.swift in Sources */,
 				9F690CC91B5337EA00EF1D35 /* FFT.swift in Sources */,
 				9F4535861B59735C00FC4736 /* MNISTLoader.swift in Sources */,
 				9F690CC81B5337EA00EF1D35 /* Exponential.swift in Sources */,

@@ -139,3 +139,33 @@ class NeuralSwiftTests: XCTestCase {
 //        let testDigitResult = digitNetwork.predictLabels(testDigit.inputs)
 //    }
 //}
+
+class DecisionTreeTests: XCTestCase {
+    func testMultiType() {
+        let data = [
+            DecisionTree.Datum(features: [.Category("A"), .Numeric(70), .Category("True")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("A"), .Numeric(90), .Category("True")], classification: "CLASS2"),
+            DecisionTree.Datum(features: [.Category("A"), .Numeric(85), .Category("False")], classification: "CLASS2"),
+            DecisionTree.Datum(features: [.Category("A"), .Numeric(95), .Category("False")], classification: "CLASS2"),
+            DecisionTree.Datum(features: [.Category("A"), .Numeric(70), .Category("False")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("B"), .Numeric(90), .Category("True")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("B"), .Numeric(78), .Category("False")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("B"), .Numeric(65), .Category("True")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("B"), .Numeric(75), .Category("False")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("C"), .Numeric(80), .Category("True")], classification: "CLASS2"),
+            DecisionTree.Datum(features: [.Category("C"), .Numeric(70), .Category("True")], classification: "CLASS2"),
+            DecisionTree.Datum(features: [.Category("C"), .Numeric(80), .Category("False")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("C"), .Numeric(80), .Category("False")], classification: "CLASS1"),
+            DecisionTree.Datum(features: [.Category("C"), .Numeric(96), .Category("False")], classification: "CLASS1"),
+        ]
+        
+        if let tree = DecisionTree(data: data) {
+            let result1 = tree.classify([.Category("B"), .Numeric(71), .Category("False")])
+            XCTAssertNotNil(result1)
+            if let result1 = result1 { XCTAssertEqual("CLASS1", result1) }
+            let result2 = tree.classify([.Category("C"), .Numeric(70), .Category("True")])
+            XCTAssertNotNil(result2)
+            if let result2 = result2 { XCTAssertEqual("CLASS2", result2) }
+        }
+    }
+}
