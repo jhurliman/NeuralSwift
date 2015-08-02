@@ -160,12 +160,47 @@ class DecisionTreeTests: XCTestCase {
         ]
         
         if let tree = DecisionTree(data: data) {
-            let result1 = tree.classify([.Category("B"), .Numeric(71), .Category("False")])
+            var success = 0
+            for datum in data {
+                let result = tree.classify(datum.features)
+                XCTAssertNotNil(result)
+                if let result = result {
+                    if result == datum.classification { success++ }
+                }
+            }
+            
+            XCTAssertGreaterThanOrEqual(Double(success)/Double(data.count), 0.85)
+        } else {
+            XCTFail("Failed to construct tree")
+        }
+    }
+    
+    func testMultiClass() {
+        let data = [
+            DecisionTree.Datum(features: [.Category("slashdot"), .Category("USA"), .Category("yes"), .Numeric(18)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("google"), .Category("France"), .Category("yes"), .Numeric(23)], classification: "Premium"),
+            DecisionTree.Datum(features: [.Category("digg"), .Category("USA"), .Category("yes"), .Numeric(24)], classification: "Basic"),
+            DecisionTree.Datum(features: [.Category("kiwitobes"), .Category("France"), .Category("yes"), .Numeric(23)], classification: "Basic"),
+            DecisionTree.Datum(features: [.Category("google"), .Category("UK"), .Category("no"), .Numeric(21)], classification: "Premium"),
+            DecisionTree.Datum(features: [.Category("(direct)"), .Category("New Zealand"), .Category("no"), .Numeric(12)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("(direct)"), .Category("UK"), .Category("no"), .Numeric(21)], classification: "Basic"),
+            DecisionTree.Datum(features: [.Category("google"), .Category("USA"), .Category("no"), .Numeric(24)], classification: "Premium"),
+            DecisionTree.Datum(features: [.Category("slashdot"), .Category("France"), .Category("yes"), .Numeric(19)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("digg"), .Category("USA"), .Category("no"), .Numeric(18)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("google"), .Category("UK"), .Category("no"), .Numeric(18)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("kiwitobes"), .Category("UK"), .Category("no"), .Numeric(19)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("digg"), .Category("New Zealand"), .Category("yes"), .Numeric(12)], classification: "Basic"),
+            DecisionTree.Datum(features: [.Category("slashdot"), .Category("UK"), .Category("no"), .Numeric(21)], classification: "None"),
+            DecisionTree.Datum(features: [.Category("google"), .Category("UK"), .Category("yes"), .Numeric(18)], classification: "Basic"),
+            DecisionTree.Datum(features: [.Category("kiwitobes"), .Category("France"), .Category("yes"), .Numeric(19)], classification: "Basic"),
+        ]
+        
+        if let tree = DecisionTree(data: data) {
+            let result1 = tree.classify([.Category("(direct)"), .Category("USA"), .Category("yes"), .Numeric(5)])
             XCTAssertNotNil(result1)
-            if let result1 = result1 { XCTAssertEqual("CLASS1", result1) }
-            let result2 = tree.classify([.Category("C"), .Numeric(70), .Category("True")])
-            XCTAssertNotNil(result2)
-            if let result2 = result2 { XCTAssertEqual("CLASS2", result2) }
+            if let result1 = result1 { XCTAssertEqual("Basic", result1) }
+        } else {
+            XCTFail("Failed to construct tree")
         }
     }
 }

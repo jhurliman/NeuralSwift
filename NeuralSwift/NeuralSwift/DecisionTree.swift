@@ -11,7 +11,7 @@ import Foundation
 public class DecisionTree {
     // MARK: - Feature
     
-    public enum Feature: Hashable {
+    public enum Feature: Hashable, Printable {
         case Numeric(Double)
         case Category(String)
         
@@ -58,8 +58,8 @@ public class DecisionTree {
     // MARK: - Datum
     
     public struct Datum {
-        let features: [Feature]
-        let classification: String
+        public let features: [Feature]
+        public let classification: String
         
         public init(features: [Feature], classification: String) {
             self.features = features
@@ -69,21 +69,24 @@ public class DecisionTree {
     
     // MARK: - Node
     
-    public class Node: Printable, DebugPrintable {
-        let children: [String: Node]
+    public class Node: Printable {
+        let leftChild: Node?
+        let rightChild: Node?
         let feature: Feature
         let featureIndex: Int
         let classification: String?
         
-        init(feature: Feature, featureIndex: Int, children: [String: Node]) {
-            self.children = children
+        init(feature: Feature, featureIndex: Int, leftChild: Node?, rightChild: Node?) {
+            self.leftChild = leftChild
+            self.rightChild = rightChild
             self.feature = feature
             self.featureIndex = featureIndex
             self.classification = nil
         }
         
         init(classification: String) {
-            self.children = [:]
+            self.leftChild = nil
+            self.rightChild = nil
             self.feature = .Numeric(0)
             self.featureIndex = -1
             self.classification = classification
@@ -91,11 +94,7 @@ public class DecisionTree {
         
         public var description: String {
             if let c = classification { return "Classification: \(c)" }
-            return "\(feature.description) @ \(featureIndex) (\(children.count) children)"
-        }
-        
-        public var debugDescription: String {
-            return self.description
+            return "\(feature.description) @ \(featureIndex))"
         }
     }
     
@@ -105,7 +104,7 @@ public class DecisionTree {
     
     public init?(data: [Datum]) {
         if data.count == 0 {
-            rootNode = Node(feature: .Numeric(0), featureIndex: 0, children: [:])
+            rootNode = Node(classification: "")
             return nil
         }
         
@@ -117,19 +116,14 @@ public class DecisionTree {
         
         while true {
             if let classification = curNode.classification { return classification }
-            if curNode.children.count == 0 { return nil }
             
             let cut = curNode.feature
             if cut.isNumeric {
                 let value = features[curNode.featureIndex].number
-                curNode = ((value <= cut.number) ? curNode.children["left"] : curNode.children["right"])!
+                curNode = (value <= cut.number) ? curNode.leftChild! : curNode.rightChild!
             } else {
                 let category = features[curNode.featureIndex].category
-                if let matchingNode = curNode.children[category] {
-                    curNode = matchingNode
-                } else {
-                    return nil
-                }
+                curNode = (curNode.feature.category == category) ? curNode.leftChild! : curNode.rightChild!
             }
         }
     }
@@ -144,19 +138,15 @@ public class DecisionTree {
         features.removeAtIndex(bestFeatureIndex)
         
         // Split the data based on the selected optimal feature
-        let dataSplits = split(data, featureIndex: bestFeatureIndex, cut: bestFeature)
+        let (left, right) = split(data, featureIndex: bestFeatureIndex, cut: bestFeature)
         
-        var children = [String: Node]()
-        if bestFeature.isNumeric {
-            children["left"] = createNode(dataSplits.first!.1, features: features)
-            children["right"] = createNode(dataSplits.last!.1, features: features)
-        } else {
-            for (feature, childData) in dataSplits {
-                children[feature.category] = createNode(childData, features: features)
-            }
+        if right.count == 0 {
+            return Node(classification: mostCommonClassification(left))
         }
         
-        return Node(feature: bestFeature, featureIndex: bestFeatureIndex, children: children)
+        let leftNode = createNode(left, features: features)
+        let rightNode = createNode(right, features: features)
+        return Node(feature: bestFeature, featureIndex: bestFeatureIndex, leftChild: leftNode, rightChild: rightNode)
     }
     
     static func mostCommonClassification(data: [Datum]) -> String {
@@ -227,44 +217,21 @@ public class DecisionTree {
         return unique(features)
     }
     
-    static func split(data: [Datum], featureIndex: Int, cut: Feature) -> [(Feature, [Datum])] {
-        var subsets = [(Feature, [Datum])]()
+    static func split(data: [Datum], featureIndex: Int, cut: Feature) -> ([Datum], [Datum]) {
+        var left = [Datum]()
+        var right = [Datum]()
         
         if cut.isNumeric {
-            // Splitting on a numeric feature separates all of the values to the
-            // left or right of the split value
-            var subset1 = [Datum]()
-            var subset2 = [Datum]()
-            
             for datum in data {
-                (datum.features[featureIndex].number <= cut.number) ? subset1.append(datum) : subset2.append(datum)
+                (datum.features[featureIndex].number <= cut.number) ? left.append(datum) : right.append(datum)
             }
-            
-            subsets.append((cut, subset1))
-            subsets.append((cut, subset2))
         } else {
-            // Splitting on a category feature separates values into one bucket
-            // for each unique category
-            let features = uniqueFeatures(data, featureIndex: featureIndex)
-            var featuresMap = [Feature: [Datum]]()
-            for feature in features {
-                featuresMap[feature] = []
-            }
-            
             for datum in data {
-                let category = datum.features[featureIndex]
-                if var subset = featuresMap[category] {
-                    subset.append(datum)
-                    featuresMap[category] = subset
-                }
-            }
-            
-            for (feature, subset) in featuresMap {
-                subsets.append((feature, subset))
+                (datum.features[featureIndex].category == cut.category) ? left.append(datum) : right.append(datum)
             }
         }
         
-        return subsets
+        return (left, right)
     }
     
     static func probability(datum: Datum, _ data: [Datum]) -> Double {
@@ -286,15 +253,9 @@ public class DecisionTree {
     }
     
     static func conditionalEntropy(data: [Datum], featureIndex: Int, cut: Feature) -> Double {
-        let subsets = split(data, featureIndex: featureIndex, cut: cut)
-        let dataSize = Double(data.count)
-        
-        var sumOfEntropies = 0.0
-        for (_, subset) in subsets {
-            sumOfEntropies += Double(subset.count)/dataSize * entropy(subset)
-        }
-        
-        return sumOfEntropies
+        let (left, right) = split(data, featureIndex: featureIndex, cut: cut)
+        let p = Double(left.count)/Double(data.count)
+        return p*entropy(left) + (1.0-p)*entropy(right)
     }
 }
 
