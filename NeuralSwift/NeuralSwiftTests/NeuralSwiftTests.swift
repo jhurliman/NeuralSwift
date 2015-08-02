@@ -160,16 +160,11 @@ class DecisionTreeTests: XCTestCase {
         ]
         
         if let tree = DecisionTree(data: data) {
-            var success = 0
             for datum in data {
                 let result = tree.classify(datum.features)
                 XCTAssertNotNil(result)
-                if let result = result {
-                    if result == datum.classification { success++ }
-                }
+                if let result = result { XCTAssertEqual(datum.classification, result) }
             }
-            
-            XCTAssertGreaterThanOrEqual(Double(success)/Double(data.count), 0.85)
         } else {
             XCTFail("Failed to construct tree")
         }
@@ -196,6 +191,12 @@ class DecisionTreeTests: XCTestCase {
         ]
         
         if let tree = DecisionTree(data: data) {
+            for datum in data {
+                let result = tree.classify(datum.features)
+                XCTAssertNotNil(result)
+                if let result = result { XCTAssertEqual(datum.classification, result) }
+            }
+            
             let result1 = tree.classify([.Category("(direct)"), .Category("USA"), .Category("yes"), .Numeric(5)])
             XCTAssertNotNil(result1)
             if let result1 = result1 { XCTAssertEqual("Basic", result1) }

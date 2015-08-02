@@ -94,6 +94,24 @@ public class DecisionTree {
             if let c = classification { return "Classification: \(c)" }
             return "\(feature.description) @ \(featureIndex))"
         }
+        
+        public func printTree() {
+            Node.printTree(self)
+        }
+        
+        static func printTree(node: Node, _ indent: String = "") {
+            if let classification = node.classification {
+                println(classification)
+                return
+            }
+            
+            println("\(node.featureIndex):\(node.feature)")
+            
+            print("\(indent)L->")
+            printTree(node.leftChild!, indent + "  ")
+            print("\(indent)R->")
+            printTree(node.rightChild!, indent + "  ")
+        }
     }
     
     // MARK: - DecisionTree
@@ -106,7 +124,8 @@ public class DecisionTree {
             return nil
         }
         
-        rootNode = DecisionTree.createNode(data, features: data.first!.features)
+        var indexes = [Int](0..<data.first!.features.count)
+        rootNode = DecisionTree.createNode(data, featureIndexes: indexes)
     }
     
     public func classify(features: [Feature]) -> String? {
@@ -118,7 +137,7 @@ public class DecisionTree {
             let cut = curNode.feature
             if cut.isNumeric {
                 let value = features[curNode.featureIndex].number
-                curNode = (value <= cut.number) ? curNode.leftChild! : curNode.rightChild!
+                curNode = (value >= cut.number) ? curNode.leftChild! : curNode.rightChild!
             } else {
                 let category = features[curNode.featureIndex].category
                 curNode = (curNode.feature.category == category) ? curNode.leftChild! : curNode.rightChild!
@@ -128,24 +147,22 @@ public class DecisionTree {
     
     // MARK: - Tree Construction
     
-    static func createNode(data: [Datum], var features: [Feature]) -> Node {
-        if features.count == 0 {
+    static func createNode(data: [Datum], var featureIndexes: [Int]) -> Node {
+        if featureIndexes.count == 0 {
             return Node(classification: mostCommonClassification(data))
         }
         
-        // Identify best feature via max gain, remove from remaining features
-        let (bestFeatureIndex, bestFeature) = maxGainFeature(data, features: features)
-        features.removeAtIndex(bestFeatureIndex)
+        // Identify best feature via max gain
+        let (bestFeatureIndex, bestFeature) = maxGainFeature(data, featureIndexes: featureIndexes)
+        if bestFeatureIndex == -1 {
+            return Node(classification: mostCommonClassification(data))
+        }
         
         // Split the data based on the selected optimal feature
         let (left, right) = split(data, featureIndex: bestFeatureIndex, cut: bestFeature)
         
-        if right.count == 0 {
-            return Node(classification: mostCommonClassification(left))
-        }
-        
-        let leftNode = createNode(left, features: features)
-        let rightNode = createNode(right, features: features)
+        let leftNode = createNode(left, featureIndexes: featureIndexes)
+        let rightNode = createNode(right, featureIndexes: featureIndexes)
         return Node(feature: bestFeature, featureIndex: bestFeatureIndex, leftChild: leftNode, rightChild: rightNode)
     }
     
@@ -164,36 +181,40 @@ public class DecisionTree {
     
     // MARK: - Gain
     
-    static func maxGainFeature(data: [Datum], features: [Feature]) -> (Int, Feature) {
-        precondition(features.count > 0, "Empty features array passed to maxGainFeature")
+    static func maxGainFeature(data: [Datum], featureIndexes: [Int]) -> (Int, Feature) {
+        precondition(featureIndexes.count > 0, "No features indexes passed to maxGainFeature")
         
-        var best = -Double.infinity
+        let dataEntropy = entropy(data)
+        
+        var bestGain = 0.0
         var bestIndex = -1
-        var bestCut = features.first!
+        var bestCut = Feature.Numeric(0)
         
-        for i in 0..<features.count {
-            let (curGain, curCut) = gain(data, featureIndex: i)
-            if curGain > best {
-                best = curGain
+        for index in featureIndexes {
+            let (curGain, curCut) = gain(data, dataEntropy: dataEntropy, featureIndex: index)
+            if curGain > bestGain {
+                bestGain = curGain
                 bestCut = curCut
-                bestIndex = i
+                bestIndex = index
             }
         }
         
         return (bestIndex, bestCut)
     }
     
-    static func gain(data: [Datum], featureIndex: Int) -> (Double, Feature) {
-        let dataEntropy = entropy(data)
-        let features = unique(data.map { $0.features[featureIndex] })
-        var best = -Double.infinity
-        var bestCut = features.first!
+    static func gain(data: [Datum], dataEntropy: Double, featureIndex: Int) -> (Double, Feature) {
+        let featureValues = unique(data.map { $0.features[featureIndex] })
+        var best = 0.0
+        var bestCut = featureValues.first!
         
-        for cut in features {
-            let curGain = dataEntropy - conditionalEntropy(data, featureIndex: featureIndex, cut: cut)
-            if curGain > best {
-                best = curGain
-                bestCut = cut
+        for cut in featureValues {
+            let (left, right) = split(data, featureIndex: featureIndex, cut: cut)
+            if left.count > 0 && right.count > 0 {
+                let curGain = dataEntropy - conditionalEntropy(left: left, right: right)
+                if curGain > best {
+                    best = curGain
+                    bestCut = cut
+                }
             }
         }
         
@@ -220,7 +241,7 @@ public class DecisionTree {
         
         if cut.isNumeric {
             for datum in data {
-                (datum.features[featureIndex].number <= cut.number) ? left.append(datum) : right.append(datum)
+                (datum.features[featureIndex].number >= cut.number) ? left.append(datum) : right.append(datum)
             }
         } else {
             for datum in data {
@@ -249,9 +270,8 @@ public class DecisionTree {
         return sum
     }
     
-    static func conditionalEntropy(data: [Datum], featureIndex: Int, cut: Feature) -> Double {
-        let (left, right) = split(data, featureIndex: featureIndex, cut: cut)
-        let p = Double(left.count)/Double(data.count)
+    static func conditionalEntropy(#left: [Datum], right: [Datum]) -> Double {
+        let p = Double(left.count)/Double(left.count + right.count)
         return p*entropy(left) + (1.0-p)*entropy(right)
     }
 }
