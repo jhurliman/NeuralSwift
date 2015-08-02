@@ -101,8 +101,7 @@ public class Network {
             let curLayer = curTrainer.layer
             let prevLayerActivations = (i > 0) ? trainingNetwork[i - 1].activations : inputs
             
-            let backprop = curTrainer.backPropagate(delta, prevLayerActivations: prevLayerActivations)
-            delta = backprop * curLayer.activation_Df(curTrainer.z)
+            delta = curTrainer.backPropagate(delta, prevLayerActivations: prevLayerActivations)
         }
     }
     
