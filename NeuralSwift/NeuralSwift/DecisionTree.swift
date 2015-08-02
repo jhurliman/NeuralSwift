@@ -136,8 +136,7 @@ public class DecisionTree {
     
     static func createNode(data: [Datum], var features: [Feature]) -> Node {
         if features.count == 0 {
-            // FIXME: Need to select most common classification from data
-            return Node(classification: data.first!.classification)
+            return Node(classification: mostCommonClassification(data))
         }
         
         // Identify best feature via max gain, remove from remaining features
@@ -158,6 +157,19 @@ public class DecisionTree {
         }
         
         return Node(feature: bestFeature, featureIndex: bestFeatureIndex, children: children)
+    }
+    
+    static func mostCommonClassification(data: [Datum]) -> String {
+        precondition(data.count > 0)
+        var counts = [String: Int]()
+        
+        for datum in data {
+            counts[datum.classification] = (counts[datum.classification] ?? 0) + 1
+        }
+        
+        // Sort dictionary entries by value (occurrences) in descending order
+        let sorted = Array(counts).sorted { $0.1 > $1.1 }
+        return sorted.first!.0
     }
     
     // MARK: - Gain
