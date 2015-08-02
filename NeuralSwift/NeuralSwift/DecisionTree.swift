@@ -48,22 +48,20 @@ public class DecisionTree {
         }
     }
     
-    public struct IndexedFeature: Hashable {
-        let feature: Feature
-        let index: Int
-        
-        public var hashValue: Int { return index }
-    }
-    
     // MARK: - Datum
     
-    public struct Datum {
+    public struct Datum: Printable {
         public let features: [Feature]
         public let classification: String
         
         public init(features: [Feature], classification: String) {
             self.features = features
             self.classification = classification
+        }
+        
+        public var description: String {
+            let featuresStr = ",".join(features.map { $0.description })
+            return "[\(featuresStr)] -> \(classification)"
         }
     }
     
@@ -127,6 +125,8 @@ public class DecisionTree {
             }
         }
     }
+    
+    // MARK: - Tree Construction
     
     static func createNode(data: [Datum], var features: [Feature]) -> Node {
         if features.count == 0 {
@@ -207,14 +207,11 @@ public class DecisionTree {
         return data.filter { seen.updateValue(true, forKey: $0) == nil }
     }
     
-    static func unique(data: [Datum]) -> [Datum] {
+    static func uniqueClassifications(data: [Datum]) -> [String] {
         var seen = [String: Bool]()
-        return data.filter { seen.updateValue(true, forKey: $0.classification) == nil }
-    }
-    
-    static func uniqueFeatures(data: [Datum], featureIndex: Int) -> [Feature] {
-        let features = data.map { $0.features[featureIndex] }
-        return unique(features)
+        return data
+            .filter { seen.updateValue(true, forKey: $0.classification) == nil }
+            .map { $0.classification }
     }
     
     static func split(data: [Datum], featureIndex: Int, cut: Feature) -> ([Datum], [Datum]) {
@@ -234,19 +231,19 @@ public class DecisionTree {
         return (left, right)
     }
     
-    static func probability(datum: Datum, _ data: [Datum]) -> Double {
+    static func probability(classification: String, _ data: [Datum]) -> Double {
         var count = 0
-        for curData in data {
-            if curData.classification == datum.classification { count++ }
+        for datum in data {
+            if datum.classification == classification { count++ }
         }
         return Double(count) / Double(data.count)
     }
     
     static func entropy(data: [Datum]) -> Double {
-        let uniqueData = unique(data)
+        let classifications = uniqueClassifications(data)
         var sum = 0.0
-        for datum in uniqueData {
-            let p = probability(datum, data)
+        for classification in classifications {
+            let p = probability(classification, data)
             sum += -p * log2(p)
         }
         return sum
@@ -262,8 +259,4 @@ public class DecisionTree {
 public func ==(lhs: DecisionTree.Feature, rhs: DecisionTree.Feature) -> Bool {
     if lhs.isNumeric != rhs.isNumeric { return false }
     return lhs.isNumeric ? lhs.number == rhs.number : lhs.category == rhs.category
-}
-
-public func ==(lhs: DecisionTree.IndexedFeature, rhs: DecisionTree.IndexedFeature) -> Bool {
-    return lhs.index == rhs.index
 }
