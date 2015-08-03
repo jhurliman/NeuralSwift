@@ -118,14 +118,14 @@ public class DecisionTree {
     
     public let rootNode: Node
     
-    public init?(data: [Datum]) {
+    public init?(data: [Datum], maxFeatures: Int? = nil) {
         if data.count == 0 {
             rootNode = Node(classification: "")
             return nil
         }
         
         var indexes = [Int](0..<data.first!.features.count)
-        rootNode = DecisionTree.createNode(data, featureIndexes: indexes)
+        rootNode = DecisionTree.createNode(data, featureIndexes: indexes, maxFeatures: maxFeatures)
     }
     
     public func classify(features: [Feature]) -> String? {
@@ -147,13 +147,13 @@ public class DecisionTree {
     
     // MARK: - Tree Construction
     
-    static func createNode(data: [Datum], var featureIndexes: [Int]) -> Node {
+    static func createNode(data: [Datum], var featureIndexes: [Int], maxFeatures: Int?) -> Node {
         if featureIndexes.count == 0 {
             return Node(classification: mostCommonClassification(data))
         }
         
         // Identify best feature via max gain
-        let (bestFeatureIndex, bestFeature) = maxGainFeature(data, featureIndexes: featureIndexes)
+        let (bestFeatureIndex, bestFeature) = maxGainFeature(data, featureIndexes: featureIndexes, maxFeatures: maxFeatures)
         if bestFeatureIndex == -1 {
             return Node(classification: mostCommonClassification(data))
         }
@@ -161,8 +161,8 @@ public class DecisionTree {
         // Split the data based on the selected optimal feature
         let (left, right) = split(data, featureIndex: bestFeatureIndex, cut: bestFeature)
         
-        let leftNode = createNode(left, featureIndexes: featureIndexes)
-        let rightNode = createNode(right, featureIndexes: featureIndexes)
+        let leftNode = createNode(left, featureIndexes: featureIndexes, maxFeatures: maxFeatures)
+        let rightNode = createNode(right, featureIndexes: featureIndexes, maxFeatures: maxFeatures)
         return Node(feature: bestFeature, featureIndex: bestFeatureIndex, leftChild: leftNode, rightChild: rightNode)
     }
     
@@ -181,10 +181,16 @@ public class DecisionTree {
     
     // MARK: - Gain
     
-    static func maxGainFeature(data: [Datum], featureIndexes: [Int]) -> (Int, Feature) {
+    static func maxGainFeature(data: [Datum], var featureIndexes: [Int], maxFeatures: Int?) -> (Int, Feature) {
         precondition(featureIndexes.count > 0, "No features indexes passed to maxGainFeature")
         
         let dataEntropy = entropy(data)
+        
+        if var maxFeatures = maxFeatures {
+            // Only consider a random subset of features
+            maxFeatures = Swift.min(featureIndexes.count, maxFeatures)
+            featureIndexes = sampleWithoutReplacement(featureIndexes, count: maxFeatures)
+        }
         
         var bestGain = 0.0
         var bestIndex = -1
@@ -219,6 +225,18 @@ public class DecisionTree {
         }
         
         return (best, bestCut)
+    }
+    
+    static func sampleWithoutReplacement(array: [Int], count: Int) -> [Int] {
+        precondition(count <= array.count)
+        
+        var subset = array
+        for _ in 0..<(array.count - count) {
+            let index = Int(arc4random_uniform(UInt32(subset.count)))
+            subset.removeAtIndex(index)
+        }
+        
+        return subset
     }
     
     // MARK: - Entropy
